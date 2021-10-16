@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            background: linear-gradient(90deg, rgb(42, 42, 120), rgb(249, 248, 250), rgb(42, 42, 120));
+            /* background-color: rgb(42, 42, 120); */
+            z-index: -1;
+        }
+        
+        .search {
+            background: url(weather_2.jpg) no-repeat;
+            width: 241px;
+            height: 45px;
+            font-family: 'Arial';
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 15px;
+            border-top: 3px solid hsl(357.1, 49.2%, 75.3%);
+            border-bottom: 3px solid #b0fafa;
+            box-shadow: 0px 0px 5px rgba(183, 198, 225, 0.91), 0px 2px 5px rgba(120, 154, 219, 0.91), 0px 5px 5px rgba(143, 174, 232, 0.91), 0px 7px 5px rgba(167, 187, 222, 0.91)
+        }
+        
+        #form {
+            background: url('./WhatsApp\ Image\ 2021-10-16\ at\ 15.52.57.jpeg') no-repeat;
+            /* background: linear-gradient(90deg, rgb(97, 90, 94), rgb(249, 248, 250)); */
+            width: 63%;
+            font-family: 'Arial';
+            margin: 25px 18%;
+            padding: 10px;
+            border-radius: 15px;
+            color: #ffff;
+            border: 3px solid rgb(175, 172, 172);
+            border-top: 3px solid hsl(357.1, 49.2%, 75.3%);
+            border-bottom: 3px solid #b0fafa;
+            box-shadow: 0px 0px 10px rgba(183, 198, 225, 0.91), 0px 5px 10px rgba(120, 154, 219, 0.91), 0px 10px 10px rgba(143, 174, 232, 0.91), 0px 10px 10px rgba(167, 187, 222, 0.91)
+        }
+        
+        .head,
+        .header1 {
+            display: flex;
+        }
+        
+        .inpt {
+            border-radius: 14px;
+            width: 142px;
+            height: 20px;
+            text-align: center;
+            margin: 8px;
+        }
+        
+        .btn {
+            border-radius: 8px;
+            width: 68px;
+            height: 28px;
+            text-align: center;
+            margin: 2px;
+            cursor: pointer;
+            color: black;
+            background: linear-gradient(90deg, rgb(97, 90, 94), rgb(249, 248, 250));
+        }
+        
+        .btn:hover {
+            background: linear-gradient(90deg, rgb(249, 248, 250), rgb(97, 90, 94));
+            color: black;
+        }
+        
+        .box {
+            margin: 0px 44px;
+            padding: 7px 7px 7px 7px;
+            text-align: center;
+            color: #ffff;
+            display: flex;
+        }
+        
+        .date {
+            margin: 20px 0px 0px 520px;
+        }
+        
+        .header1 h3 {
+            margin-bottom: 0px;
+        }
+        
+        #feels_like,
+        #date {
+            font-size: 18px;
+            font-weight: 300;
+        }
+        
+        .set {
+            padding: 17px;
+        }
+        
+        hr {
+            color: cadetblue;
+        }
+        
+        .hd1,
+        .hd2 {
+            padding: 20px;
+            margin: 30px 107px;
+            color: #ffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <div class="search1">
+            <input type="text" class="inpt" id="s_city"><button onclick="ch()" class="btn">Search</button>
+        </div>
+    </div>
+    <div class="base4" id="form">
+        <div class="header">
+            <div class="head1">
+                <div class="header1">
+                    <h3>Current Weather</h3>
+                    <span class="date" id="date">Celender</span>
+                </div>
+                <span class="header1" id="time">4:04 PM</span>
+            </div>
+            <div class="head">
+                <h1 class="hd1" id="temp">Weather</h1>
+                <div class="hd2">
+                    <h2 id="weather_des">Cloudy</h2>
+                    <span>Feels Like <span id="feels_like">38</span></span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="set">
+                <h3>Max temp</h3>
+                <h3 id="max">10</h3>
+            </div>
+            <div class="set">
+                <h3>Min Temp</h3>
+                <h3 id="min">10</h3>
+            </div>
+            <div class="set">
+                <h3>Wind</h3>
+                <h3 id="wind">10</h3>
+            </div>
+            <div class="set">
+                <h3>Humidity</h3>
+                <h3 id="humidity">10</h3>
+            </div>
+            <div class="set">
+                <h3>Visibility</h3>
+                <h3 id="visibility">10</h3>
+            </div>
+            <div class="set">
+                <h3>Pressure</h3>
+                <h3 id="presure">10</h3>
+            </div>
+        </div>
+    </div>
+    <script>
+        function ch() {
+            var temp_2 = document.getElementById('temp')
+            var Weather_des1 = document.getElementById('weather_des')
+            var min_t = document.getElementById('min')
+            var wind_1 = document.getElementById('wind')
+            var hum = document.getElementById('humidity')
+            var visii = document.getElementById('visibility')
+            var pree = document.getElementById('presure')
+            var max_t = document.getElementById('max')
+            var date_1 = document.getElementById('date')
+            var timee = document.getElementById('time')
+
+
+            var s_city = document.getElementById('s_city').value
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${s_city}&appid=33e5e2a4acd230567bd5e46793ac1482`)
+                .then(Response => Response.json())
+                .then(data => {
+
+                    console.log(data)
+                    console.log(data.main.humidity)
+                    console.log(data.main.pressure)
+                    console.log(data.main.feels_like)
+                    console.log(data.visibility)
+                    console.log(data.wind.speed)
+
+
+                    var d = new Date();
+                    var h = d.getHours();
+                    var m = d.getMinutes();
+                    var s = d.getSeconds();
+                    var timm = h + ":" + m + ":" + s;
+                    timee.innerHTML = timm
+
+                    var temp1 = data.main.temp;
+                    var temp = temp1.toString();
+                    var temperature = temp.substr(0, 2);
+
+                    var feels1 = data.main.feels_like;
+                    var feels2 = feels1.toString();
+                    var feels3 = temp.substr(0, 2);
+                    feels_like.innerHTML = feels3 + "&deg";
+
+                    var min_temp = data.main.temp_max;
+                    var min_temp1 = min_temp.toString();
+                    var min_temp2 = min_temp1.substr(0, 2);
+                    min_t.innerHTML = min_temp2 + "&deg";
+
+                    var max_temp = data.main.temp_min;
+                    var max_temp1 = max_temp.toString();
+                    var max_temp2 = max_temp1.substr(0, 2);
+                    max_t.innerHTML = max_temp2 + "&deg";
+
+                    var wind = data.wind.speed;
+                    wind_1.innerHTML = wind + "km/h";
+
+
+                    var hum1 = data.main.humidity;
+                    hum.innerHTML = hum1 + "%";
+
+                    var visi = data.visibility;
+                    visii.innerHTML = visi;
+
+                    var pre = data.main.pressure;
+                    pree.innerHTML = pre;
+
+                    var des = data.weather
+                    var description = des[0]
+
+                    var sky = description.description
+                    Weather_des1.innerHTML = sky
+
+                    var today = new Date();
+                    date_1.innerHTML = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear()
+
+
+                    temp_2.innerHTML = temperature + "&deg";
+
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+
+        }
+    </script>
+</body>
+
+</html>
